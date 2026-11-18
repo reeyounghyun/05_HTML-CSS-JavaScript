@@ -1,1 +1,1 @@
-# 05_html-css-JavaScript
+# 05_HTML-CSS-JavaScript
