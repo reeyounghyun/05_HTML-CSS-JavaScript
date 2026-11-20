@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[답안] 폼 - 회원가입 양식</title>
+</head>
+
+<!--
+================================================================================
+ 06. 폼 - 회원가입 양식 만들기 [답안]
+
+ 답을 맞히는 것보다 "왜 이렇게 쓰는지"가 중요하다.
+ 각 항목의 해설 주석을 반드시 같이 읽는다.
+================================================================================
+-->
+
+<body>
+    <h1>회원가입</h1>
+
+    <!-- 해설 1. action은 값을 보낼 주소, method는 보내는 방식이다.
+         GET 방식은 브라우저 URL에 데이터가 파라미터로 붙어서 보이고, post는 HTTP Body에 실어서 보낸다.
+           - GET /api/v1/users?userId=tdd&name=홍길동
+           - POST /api/v1/users/login {"userId":"tdd","userPwd":"123"}
+         따라서 비밀번호 같은 민감한 정보가 들어가는 폼은 반드시 post를 쓴다. -->
+    <form action="#" method="post">
+
+        <!-- 해설 2. fieldset은 관련 있는 입력들을 하나로 묶고, legend는 그 묶음의 제목이다.
+             묶어두면 화면 낭독기가 "기본 정보 그룹의 아이디 입력란"처럼 읽어줄 수 있다. -->
+        <fieldset>
+            <legend>기본 정보</legend>
+
+            <!-- 해설 3. label의 for와 input의 id가 같은 값이어야 연결된다.
+                 연결되면 라벨 글자를 클릭해도 입력창에 커서가 간다.
+                 체크박스나 라디오에서는 클릭 영역이 넓어져서 훨씬 쓰기 편해진다.
+
+                 name과 id는 역할이 다르다. 자주 헷갈리는 부분이다.
+                   - name : 서버로 데이터를 보낼 때 쓰는 '키' 이름이다. 없으면 값이 전송되지 않는다.
+                            SpringBoot에서는 @RequestParam이나 @ModelAttribute와 연결된다.
+                   - id   : 문서 안에서 이 요소를 가리키는 '고유 이름'이다. label 연결과 JS에서 쓴다. -->
+            <p>
+                <label for="userId">아이디 : </label>
+                <input type="text" id="userId" name="userId" placeholder="아이디를 입력하세요" required>
+            </p>
+
+            <!-- 해설 4. type="password"로 하면 입력한 글자가 점(*)으로 가려진다.
+                 required(필수값)가 붙은 항목이 비어 있으면 브라우저가 전송을 막고 안내를 띄운다.
+                 서버 쪽 검증을 대신하는 것은 아니고, 사용자에게 즉시 알려주는 1차 방어선이다. -->
+            <p>
+                <label for="userPwd">비밀번호 : </label>
+                <input type="password" id="userPwd" name="userPwd" placeholder="비밀번호를 입력하세요" required>
+            </p>
+
+            <!-- 해설 5. type="email"은 겉모습은 text와 같지만
+                 @가 없는 값을 넣으면 브라우저가 형식 오류를 잡아준다.
+                 스마트폰에서는 자판이 이메일용으로 바뀌는 이점도 있다. -->
+            <p>
+                <label for="email">이메일 : </label>
+                <input type="email" id="email" name="email" placeholder="example@mail.com">
+            </p>
+        </fieldset>
+
+        <fieldset>
+            <legend>추가 정보</legend>
+
+            <!-- 해설 7. 라디오 버튼의 핵심은 name을 같게 맞추는 것이다.
+                 name이 같아야 하나의 그룹으로 묶여서 하나만 선택된다.
+                 name을 다르게 주면 각각 따로 놀아서 둘 다 선택되는 현상이 발생한다.
+                 반대로 id는 문서에서 유일해야 하므로 서로 달라야 한다. -->
+            <p>
+                <label>성별 : </label>
+                <input type="radio" id="male" name="gender" value="M" checked>
+                <label for="male">남자</label>
+                <input type="radio" id="female" name="gender" value="F">
+                <label for="female">여자</label>
+            </p>
+
+            <!-- 해설 8. 체크박스는 name이 같아도 여러 개가 동시에 선택된다.
+                 라디오와 체크박스의 차이는 name이 아니라 type이 만든다.
+                 checked를 붙이면 처음부터 선택된 상태로 시작하기 때문에 디폴트 값을 설정할 수 있다. -->
+            <p>
+                <label>관심분야 : </label>
+                <input type="checkbox" id="front" name="interest" value="frontend" checked>
+                <label for="front">프론트엔드</label>
+                <input type="checkbox" id="back" name="interest" value="backend">
+                <label for="back">백엔드</label>
+                <input type="checkbox" id="ai" name="interest" value="ai">
+                <label for="ai">AI</label>
+            </p>
+
+            <!-- 해설 9. select는 선택지가 많을 때 화면을 덜 차지한다.
+                 사용자에게 보이는 것은 태그 사이의 글자(서울)이고,
+                 서버로 전송되는 것은 value 값(seoul)이다. 이 둘은 달라도 된다. -->
+            <p>
+                <label for="region">거주지역 : </label>
+                <select id="region" name="region">
+                    <option value="seoul">서울</option>
+                    <option value="gyeonggi">경기</option>
+                    <option value="busan">부산</option>
+                    <option value="etc">기타</option>
+                </select>
+            </p>
+
+            <!-- 해설 10. textarea는 여러 줄을 입력받는다.
+                 input과 달리 값을 value 속성이 아니라 태그 사이에 넣는다는 점이 다르다.
+                 cols는 가로 글자 수, rows는 세로 줄 수다. -->
+            <p>
+                <label for="intro">자기소개 : </label><br>
+                <textarea id="intro" name="intro" cols="40" rows="5"></textarea>
+            </p>
+        </fieldset>
+
+        <!-- 해설 11. button 태그는 type을 쓰지 않으면 기본값이 submit이다.
+             이걸 모르고 일반 버튼인 줄 알고 쓰면 누를 때마다 폼이 전송되면서
+             페이지가 새로고침되는 현상이 생긴다. 그래서 type을 항상 명시하는 습관이 좋다.
+             자세한 것은 07번 문제에서 다룬다. -->
+        <p>
+            <button type="submit">가입하기</button>
+            <button type="reset">다시 입력</button>
+        </p>
+    </form>
+
+    <!-- [Tip] React 연결
+         React에서 폼을 다룰 때 이 구조가 거의 그대로 옮겨간다. 달라지는 건 두 가지다.
+
+         1) for -> htmlFor 로 이름이 바뀐다.
+            JSX에서 for는 자바스크립트 반복문 키워드라 쓸 수 없기 때문이다.
+              <label htmlFor="userId">아이디</label>
+            AI가 짜준 코드에 for가 그대로 있으면 경고가 뜬다. 이걸 알아볼 수 있어야 한다.
+
+         2) value와 onChange가 짝으로 붙는다. (제어 컴포넌트)
+              <input value={userId} onChange={(e) => setUserId(e.target.value)} />
+            둘 중 onChange를 빠뜨리면 "입력창에 글자가 안 써져요" 증상이 나온다.
+            프론트엔드 입문자가 가장 많이 겪는 문제이고, 원인을 알면 1초에 고친다.
+
+         그리고 name 속성은 React에서도 여전히 중요하다.
+         입력이 여러 개일 때 e.target.name으로 어떤 칸이 바뀌었는지 구분하기 때문이다. -->
+</body>
+
+</html>

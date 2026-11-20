@@ -1,13 +1,12 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>[문제] 표 디버깅 - 성적표</title>
-</head>
+  </head>
 
-<!--
+  <!--
 ================================================================================
  03. 표 디버깅 - 깨진 성적표 고치기
 
@@ -61,71 +60,72 @@
 ================================================================================
 -->
 
-<body>
+  <body>
     <h1>성적표</h1>
 
     <table border="1">
-        <caption><b>1학기 성적표</b></caption>
+      <caption>
+        <b>1학기 성적표</b>
+      </caption>
 
-        <thead>
-            <tr>
-                <th>이름</th>
-                <th>구분</th>
-                <th>HTML</th>
-                <th>CSS</th>
-                <th>JS</th>
-            </tr>
-        </thead>
+      <thead>
+        <tr>
+          <th>이름</th>
+          <th>구분</th>
+          <th>HTML</th>
+          <th>CSS</th>
+          <th>JS</th>
+        </tr>
+      </thead>
 
-        <tbody>
-            <tr>
-                <td rowspan="3">김철수</td>
-                <td>중간고사</td>
-                <td>90</td>
-                <td>85</td>
-                <td>88</td>
-            </tr>
-            <tr>
-                <td>기말고사</td>
-                <td>95</td>
-                <td>80</td>
-                <td>100</td>
-            </tr>
-            <tr>
-                <td>평균</td>
-                <td>92</td>
-                <td>82</td>
-                <td>90</td>
-            </tr>
-            <tr>
-                <td>이영희</td>
-                <td>중간고사</td>
-                <td>88</td>
-                <td>91</td>
-                <td>79</td>
-            </tr>
-        </tbody>
+      <tbody>
+        <tr>
+          <td rowspan="3">김철수</td>
+          <td>중간고사</td>
+          <td colspan="2">90</td>
+          <td>85</td>
+          <td>88</td>
+        </tr>
+        <tr>
+          <td>기말고사</td>
+          <td>95</td>
+          <td>80</td>
+        </tr>
+        <tr>
+          <td>김철수</td>
+          <td>평균</td>
+          <td>92</td>
+          <td>82</td>
+          <td>90</td>
+        </tr>
+        <tr>
+          <td>이영희</td>
+          <td>중간고사</td>
+          <td>88</td>
+          <td>91</td>
+          <td>79</td>
+        </tr>
+      </tbody>
 
-        <tfoot>
-            <tr>
-                <td colspan="4">총점</td>
-                <td>531</td>
-            </tr>
-        </tfoot>
+      <tfoot>
+        <tr>
+          <td>총점</td>
+          <td>531</td>
+        </tr>
+      </tfoot>
     </table>
 
     <!--
     ================================================================================
      [원인 기록란] - 여기를 채우는 것이 이 문제의 핵심이다.
 
-    증상 1의 원인 : 중간고사 행의 90점 셀에 colspan="2"가 적용되어 총 6칸이 되었기 때문이다.
-    증상 2의 원인 : 기말고사 행에 JS 점수 셀이 빠져서 총 4칸만 차지했기 때문이다.
-    증상 3의 원인 : rowspan="3"으로 김철수 셀이 이미 평균 행까지 차지하는데, 평균 행에 김철수 셀을 또 작성했기 때문이다.
-    증상 4의 원인 : 총점 셀이 1칸만 차지하여 합계 행이 총 2칸이 되었기 때문에 colspan="4"가 필요했다.
+     증상 1의 원인 :
+     증상 2의 원인 :
+     증상 3의 원인 :
+     증상 4의 원인 :
 
      "고쳤다"로 끝내지 말고 반드시 원인을 문장으로 적어본다.
     ================================================================================
     -->
-</body>
-
+  </body>
 </html>

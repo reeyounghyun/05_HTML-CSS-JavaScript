@@ -2,9 +2,9 @@
 <html lang="ko">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>[문제] 표 - 시간표 만들기</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[문제] 표 - 시간표 만들기</title>
 </head>
 
 <!--
@@ -59,48 +59,46 @@
 
 <body>
 
-  <table border="1">
-    <caption>AI 서빙 과정 주간 시간표</caption>
+    <!-- TODO 1. table 태그를 만든다. border="1"을 주어 선이 보이게 한다.
+         (원래 테두리는 CSS로 주는 것이 맞지만, 지금은 구조 확인이 목적이므로 border 속성을 쓴다) -->
 
-    <thead>
-      <tr>
-        <th>교시</th>
-        <th>월</th>
-        <th>화</th>
-        <th>수</th>
-        <th>목</th>
-      </tr>
-    </thead>
 
-    <tbody>
-      <tr>
-        <th>1교시</th>
-        <td colspan="2">HTML</td>
-        <td>CSS</td>
-        <td>JS</td>
-      </tr>
-      <tr>
-        <th>2교시</th>
-        <td>CSS</td>
-        <td>JS</td>
-        <td rowspan="2">React</td>
-        <td>JS</td>
-      </tr>
-      <tr>
-        <th>3교시</th>
-        <td>JS</td>
-        <td>React(수업)</td>
-        <td>프로젝트</td>
-      </tr>
-    </tbody>
+        <!-- TODO 2. caption으로 표 제목 "AI 서빙 과정 주간 시간표"를 넣는다.
+             caption은 table 태그 바로 다음에 와야 한다. -->
 
-    <tfoot>
-      <tr>
-        <th>비고</th>
-        <td colspan="4">매일 9시 시작</td>
-      </tr>
-    </tfoot>
-  </table>
+
+        <!-- TODO 3. thead를 만들고 그 안에 제목 행을 하나 넣는다.
+             셀은 td가 아니라 th를 쓴다. (제목 셀이므로)
+             내용 : 교시 / 월 / 화 / 수 / 목  -> 총 5칸 -->
+
+
+        <!-- TODO 4. tbody를 만들고 그 안에 3개의 행을 넣는다.
+
+             [1교시 행]
+               - 첫 칸은 th로 "1교시"
+               - "HTML"이 월,화 두 칸을 차지해야 한다. -> colspan 사용
+               - 그 다음 "CSS", "JS"
+               - 힌트: 가로로 2칸을 합쳤으므로 이 행의 셀 개수는 5개가 아니라 4개다.
+
+             [2교시 행]
+               - 첫 칸은 th로 "2교시"
+               - "CSS", "JS"
+               - "React"가 2교시와 3교시 두 줄을 차지해야 한다. -> rowspan 사용
+               - 마지막에 "JS"
+
+             [3교시 행]
+               - 첫 칸은 th로 "3교시"
+               - "JS", "React(수업)"
+               - 주의! 수요일 칸은 위에서 rowspan으로 이미 내려왔으므로 여기서는 쓰지 않는다.
+                 이걸 또 쓰면 칸이 하나 밀려서 표가 깨진다.
+               - 마지막에 "프로젝트" -->
+
+
+        <!-- TODO 5. tfoot을 만들고 행을 하나 넣는다.
+             - 첫 칸은 th로 "비고"
+             - "매일 9시 시작"이 나머지 4칸을 전부 차지해야 한다. -> colspan 사용 -->
+
+
 </body>
 
 </html>

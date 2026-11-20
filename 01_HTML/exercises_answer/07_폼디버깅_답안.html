@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[답안] 폼 디버깅 - 설문 양식</title>
+</head>
+
+<!--
+================================================================================
+ 07. 폼 디버깅 [답안]
+
+  [원인 요약]
+    증상 1  라벨 클릭이 안 됨    : label의 for는 "username", input의 id는 "name"으로 불일치
+    증상 2  라디오가 전부 선택됨  : name이 satisfaction1/2/3으로 달라서 그룹이 되지 않음
+    증상 3  이메일 값이 안 넘어감 : input에 name 속성이 아예 없음
+    증상 4  버튼 누르면 새로고침  : button에 type이 없어 기본값 submit으로 동작
+    증상 5  체크박스가 안 눌림    : disabled 속성이 붙어 있음
+
+  이 5가지는 실제 현업에서도 가장 흔하게 나오는 폼 버그다.
+================================================================================
+-->
+
+<body>
+    <h1>수업 만족도 설문</h1>
+
+    <form action="#" method="post">
+        <fieldset>
+            <legend>응답자 정보</legend>
+
+            <!-- [수정 1] id를 "name"에서 "username"으로 바꿔 label의 for와 일치시켰다.
+                 (반대로 label의 for를 "name"으로 바꿔도 된다. 둘이 같기만 하면 된다)
+
+                 짚고 갈 점: for와 id가 어긋나도 브라우저는 오류를 내지 않는다.
+                 화면도 멀쩡하다. 그냥 연결만 안 될 뿐이다.
+                 이런 '조용한 버그'는 증상으로만 알아챌 수 있다. -->
+            <p>
+                <label for="username">이름 : </label>
+                <input type="text" id="username" name="username">
+            </p>
+
+            <!-- [수정 2] name="email"을 추가했다.
+                 name이 없는 입력 요소는 값을 입력해도 서버로 전송되지 않는다.
+                 화면에는 정상으로 보이고 입력도 잘 되기 때문에 발견하기 어렵다.
+                 "입력은 되는데 데이터가 안 넘어온다"면 name부터 확인한다.
+
+                 SpringBoot로 받는 쪽에서 보면 이 문제가 더 명확해진다.
+                 @RequestParam("email")이나 @ModelAttribute의 필드명이 결국 이 name과 매칭되므로,
+                 name이 없으면 파라미터 자체가 도착하지 않아 400 에러나 null이 된다. -->
+            <p>
+                <label for="email">이메일 : </label>
+                <input type="email" id="email" name="email">
+            </p>
+        </fieldset>
+
+        <fieldset>
+            <legend>설문 항목</legend>
+
+            <!-- [수정 3] name을 전부 "satisfaction"으로 통일했다.
+                 라디오 버튼은 name이 같은 것끼리 한 그룹이 되어 하나만 선택된다.
+                 name이 제각각이면 각자 1인 그룹이 되어버려서 전부 선택된다.
+
+                 id는 반대다. 문서에서 유일해야 하므로 서로 달라야 한다.
+                 name은 같게, id는 다르게. 이 둘을 헷갈리지 않는 것이 핵심이다. -->
+            <p>
+                <label>수업 만족도 : </label>
+                <input type="radio" id="good" name="satisfaction" value="good">
+                <label for="good">만족</label>
+                <input type="radio" id="soso" name="satisfaction" value="soso">
+                <label for="soso">보통</label>
+                <input type="radio" id="bad" name="satisfaction" value="bad">
+                <label for="bad">불만족</label>
+            </p>
+
+            <!-- [수정 4] disabled 속성을 제거했다.
+                 disabled가 붙으면 클릭도 안 되고 값도 전송되지 않는다.
+                 비슷해 보이는 readonly와는 다르다.
+                   - disabled : 아예 비활성. 값도 전송되지 않는다.
+                   - readonly : 수정만 막는다. 값은 전송된다.
+                 "왜 안 눌리지?" 싶으면 이 두 속성을 먼저 의심한다. -->
+            <p>
+                <label>수강 과목 : </label>
+                <input type="checkbox" id="html" name="subject" value="html">
+                <label for="html">HTML</label>
+                <input type="checkbox" id="css" name="subject" value="css">
+                <label for="css">CSS</label>
+                <input type="checkbox" id="js" name="subject" value="js">
+                <label for="js">JavaScript</label>
+            </p>
+        </fieldset>
+
+        <!-- [수정 5] 첫 번째 button에 type="button"을 명시했다.
+             button 태그는 type을 쓰지 않으면 기본값이 submit이다.
+             그래서 form 안에 있는 아무 버튼이나 누르면 폼이 전송되고 페이지가 새로고침된다.
+             입력값이 전부 날아가는 것처럼 보이는 이유가 이것이다.
+
+             규칙: form 안의 button에는 type을 항상 명시한다.
+                   전송용이면 submit, 그 외 모든 버튼은 button. -->
+        <p>
+            <button type="button">입력값 확인</button>
+            <button type="submit">제출하기</button>
+        </p>
+    </form>
+
+    <!-- [Tip] React 연결
+         위 5개 중 4개는 React에서도 그대로 반복된다. 형태만 조금 바뀐다.
+
+         1) for -> htmlFor
+            JSX에서는 for 대신 htmlFor를 쓴다. 이름만 다르고 역할은 똑같으며,
+            여전히 id와 값이 일치해야 연결된다.
+
+         2) name 누락
+            React에서 입력이 여러 개일 때 e.target.name으로 어떤 칸인지 구분한다.
+            name이 없으면 undefined가 되어 엉뚱한 값이 저장된다.
+
+         3) button type 누락 (가장 자주 터진다)
+            React 폼 안의 버튼에 type을 안 쓰면 기본값 submit으로 동작해서
+            페이지가 통째로 새로고침되고 화면 상태가 초기화된다.
+            "버튼만 눌렀는데 화면이 리셋돼요"는 거의 항상 이 문제다.
+            AI가 만들어 준 코드에서도 흔히 빠져 있으니 직접 확인하는 습관을 들인다.
+
+         4) disabled
+            React에서는 조건에 따라 disabled={로딩중} 처럼 동적으로 준다.
+            "버튼이 안 눌려요"의 원인이 조건식이 계속 true인 경우가 많다.
+
+         오늘 연습한 것은 결국 이것이다.
+         "동작이 이상하다" -> "어떤 속성이 원인인지 지목한다" -> "그것만 고치라고 지시한다"
+         이 순서를 몸에 익히면 AI와 훨씬 빠르게 일할 수 있다. -->
+</body>
+
+</html>
