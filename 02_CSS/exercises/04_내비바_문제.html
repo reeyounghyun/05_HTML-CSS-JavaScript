@@ -58,10 +58,23 @@
              (힌트: 주 축 정렬. 양 끝에 붙이고 사이를 벌리는 값이 있다)
            - 세로는 가운데 정렬한다. */
 
+        .header {
+            background-color: #1565c0;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
 
         /* TODO 2. 헤더를 스크롤해도 위에 고정되게 만든다.
            - .header에 속성 두 줄을 추가한다.
            - 하나만 쓰면 동작하지 않는다. 3번 문제에서 다룬 내용이다. */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
 
 
         /* TODO 3. 오른쪽 묶음 (.nav-right)
@@ -69,19 +82,39 @@
            - 세로 가운데 정렬
            - 아이템 사이 간격 16px
              (margin 말고 간격 전용 속성을 쓴다) */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
 
 
         /* TODO 4. 메뉴 (.menu)
            - 링크들을 가로로 나란히 놓는다.
            - 아이템 사이 간격 8px
            - ul의 기본 여백과 목록 점을 없앤다. */
-
+        .menu {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
 
         /* TODO 5. 메뉴 링크 hover 효과 (.menu a:hover)
            - 배경색을 반투명 흰색으로 rgba(255, 255, 255, 0.2)
            - 모서리 4px 둥글게
            - .menu a 쪽에 transition을 주어 0.2초에 걸쳐 부드럽게 바뀌게 한다. */
 
+        .menu a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+
+        .menu a {
+            transition: background-color 0.2s;
+        }
 
         /* TODO 6. 알림 배지 (.bell-wrap, .badge)
            - 종 아이콘 오른쪽 위에 빨간 동그라미로 숫자가 뜨게 한다.
@@ -92,9 +125,28 @@
                           글자 크기 0.7rem, 안쪽 여백 2px 6px
                           완전히 둥글게 (border-radius를 크게) */
 
+        .bell-wrap {
+            position: relative;
+        }
+
+        .bell-wrap .badge {
+            position: absolute;
+            top: -4px;
+            right: -8px;
+            background: crimson;
+            color: #fff;
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 9999px;
+        }
+
 
         /* TODO 7. 본문 레이아웃 (.layout)
            - 사이드바와 본문을 가로로 나란히 놓는다. */
+        .layout {
+            display: flex;
+
+        }
 
 
         /* TODO 8. 사이드바 (.side)
@@ -102,8 +154,18 @@
            - 화면이 좁아져도 줄어들지 않게 한다.
              (힌트: flex 아이템은 기본적으로 찌그러진다. flex-shrink)
 
+
            본문 (.main)
            - 남는 공간을 전부 차지하게 한다. (힌트: flex 한 줄) */
+
+        .side {
+            width: 200px;
+            flex-shrink: 0;
+        }
+
+        .main {
+            flex: 1;
+        }
     </style>
     <title>[문제] 내비게이션 바</title>
 </head>
