@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        display: grid;
+        border: 2px dashed black;
+        background: grey;
+        gap: 20px;
+        /* height: 600px; */
+      }
+
+      .item {
+        background: greenyellow;
+        color: black;
+        padding: 15px;
+        text-align: center;
+      }
+
+      /* 열의 갯수와 너비를 정함 */
+      .col-px {
+        /* grid-template-columns: 100px 100px 100px; */
+        grid-template-columns: 100px 2fr 1fr 1fr;
+      }
+
+      .row-fix {
+        grid-template-rows: 1fr 1fr;
+      }
+
+      .layout {
+        grid-template-columns: 200px 1fr;
+        grid-template-rows: 60px 1fr 40px;
+        grid-template-areas:
+          "header header"
+          "siderbar main"
+          "fotter footer";
+        height: 300px;
+      }
+
+      .layout .head {
+        grid-area: header;
+        background: #1565c0;
+      }
+      .layout .side {
+        grid-area: sidebar;
+        background: #6a1b9a;
+      }
+      .layout .main {
+        grid-area: main;
+        background: #2e7d32;
+      }
+      .layout .foot {
+        grid-area: footer;
+        background: #455a64;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Grid 연습</h1>
+    <!-- flex : 숫자 숫자 요소에서 비율적으로 얼마나 공간을 차지할지 -->
+    <div class="container layout">
+      <div class="item head">1</div>
+      <div class="item sidebar">2</div>
+      <div class="item main">3</div>
+      <div class="item foot">4</div>
+    </div>
+  </body>
+</html>

@@ -26,7 +26,6 @@
             padding: 20px;
             border: 3px solid navy;
             background: #cfe8ff;
-            box-sizing: border-box;
         }
 
         /* ============================================================
@@ -39,14 +38,12 @@
             background: #ffe0b2;
             padding: 10px;
             box-sizing: border-box;
-            overflow: auto;
         }
 
         /* ============================================================
            [사례 C] 크기를 줬는데 적용이 안 된다
            ============================================================ */
         .tag {
-            display: inline-block;
             width: 120px;
             height: 40px;
             background: #2e7d32;
@@ -67,7 +64,6 @@
 
         .scroll-head {
             position: sticky;
-            top: 0;
             background: #6a1b9a;
             color: white;
             padding: 8px;
@@ -160,23 +156,23 @@
     ================================================================================
      [원인 기록란]
 
-      사례 A의 원인 : 기본값인 content-box에서는 width에 padding과 border가 포함되지 않기 때문이다.
-              실제 너비가 몇 px이 되는지 계산해서 적어보자 : 300px + 좌우 padding 40px + 좌우 border 6px = 346px
-              수정 방법 : box-sizing: border-box를 적용해 padding과 border를 300px 안에 포함한다.
+      사례 A의 원인 :
+              실제 너비가 몇 px이 되는지 계산해서 적어보자 :
+              수정 방법 :
 
-      사례 B의 원인 : 고정 높이보다 내용이 많은데 overflow의 기본값이 visible이라 내용이 밖으로 흘러넘쳤다.
-              수정 방법 : 상자 크기는 유지하고 overflow: auto를 적용한다.
+      사례 B의 원인 :
+              수정 방법 :
 
-      사례 C의 원인 : span은 기본적으로 인라인 요소여서 width와 height가 적용되지 않았다.
-              수정 방법 : display: inline-block을 적용한다.
+      사례 C의 원인 :
+              수정 방법 :
 
-      사례 D의 원인 : position: sticky만 있고 달라붙을 위치를 정하는 top 값이 없었다.
-              수정 방법 : position: sticky와 top: 0을 함께 적용한다.
+      사례 D의 원인 :
+              수정 방법 :
 
       [마지막 질문]
         사례 A 같은 문제를 프로젝트 전체에서 한 번에 막으려면
         CSS 파일 맨 위에 어떤 한 줄을 두면 될까?
-              답 : * { box-sizing: border-box; }
+              답 :
     ================================================================================
     -->
 </body>

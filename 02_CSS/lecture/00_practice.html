@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        display: flex;
+        border: 2px dashed black;
+        background: grey;
+        gap: 20px;
+        /* height: 600px; */
+      }
+
+      .item {
+        background: greenyellow;
+        color: black;
+        padding: 15px;
+        text-align: center;
+        width: 200px;
+        height: 100px;
+      }
+
+      /* 플렉스의 방향 */
+      .fl-di {
+        /* 기본값 */
+        flex-direction: row;
+        /* flex-direction: row-reverse; */
+      }
+
+      /* 아이템이 넘칠때 줄바꿈의 여부*/
+      .wrap {
+        /* 기본값: npwrap; */
+        flex-wrap: wrap;
+      }
+
+      /* 기준축 정렬 */
+      .jc {
+        justify-content: space-between;
+      }
+
+      /* 교차축 정렬  */
+      .ai {
+        align-items: center;
+      }
+
+      /* 남은 공간들을 어떻게 사용할지 */
+      .fl-1 {
+        flex: 5;
+      }
+
+      .fl-2 {
+        flex: 2;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>flex 연습</h1>
+    <!-- flex : 숫자 숫자 요소에서 비율적으로 얼마나 공간을 차지할지 -->
+    <div class="container fl-di wrap jc ai">
+      <div class="item fl-1">1</div>
+      <div class="item fl-2">2</div>
+    </div>
+  </body>
+</html>
