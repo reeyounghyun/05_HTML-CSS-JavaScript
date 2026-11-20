@@ -9,18 +9,18 @@
 
 // [1] 주석을 하나씩 풀면서 확인한다.
 
-// console.log(square(4));      // 예상 (O / X) :
-// console.log(cube(3));        // 예상 (O / X) :
+console.log(square(4)); // 예상 (O / X) : 16
+console.log(cube(3)); // 예상 (O / X) :
 
 function square(n) {
-    return n * n;
+  return n * n;
 }
 
 const cube = function (n) {
-    return n * n * n;
+  return n * n * n;
 };
 
-console.log(square(5));         // 예상 (O / X) :
-console.log(cube(2));           // 예상 (O / X) :
+console.log(square(5)); // 예상 (O / X) :
+console.log(cube(2)); // 예상 (O / X) :
 
 // [2] TODO : 맨 위 두 호출이 정상 동작하도록 코드 순서를 고친다.
