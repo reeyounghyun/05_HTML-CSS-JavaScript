@@ -59,12 +59,12 @@
 
             <p>
                 <label for="username">이름 : </label>
-                <input type="text" id="name" name="username">
+                <input type="text" id="username" name="username">
             </p>
 
             <p>
                 <label for="email">이메일 : </label>
-                <input type="email" id="email">
+                <input type="email" id="email" name="email">
             </p>
         </fieldset>
 
@@ -75,26 +75,26 @@
                 <label>수업 만족도 : </label>
                 <input type="radio" id="good" name="satisfaction1" value="good">
                 <label for="good">만족</label>
-                <input type="radio" id="soso" name="satisfaction2" value="soso">
+                <input type="radio" id="soso" name="satisfaction1" value="soso">
                 <label for="soso">보통</label>
-                <input type="radio" id="bad" name="satisfaction3" value="bad">
+                <input type="radio" id="bad" name="satisfaction1" value="bad">
                 <label for="bad">불만족</label>
             </p>
 
             <p>
                 <label>수강 과목 : </label>
-                <input type="checkbox" id="html" name="subject" value="html" disabled>
+                <input type="checkbox" id="html" name="subject" value="html">
                 <label for="html">HTML</label>
-                <input type="checkbox" id="css" name="subject" value="css" disabled>
+                <input type="checkbox" id="css" name="subject" value="css">
                 <label for="css">CSS</label>
-                <input type="checkbox" id="js" name="subject" value="js" disabled>
+                <input type="checkbox" id="js" name="subject" value="js">
                 <label for="js">JavaScript</label>
             </p>
         </fieldset>
 
         <p>
-            <button>입력값 확인</button>
-            <button type="submit">제출하기</button>
+            <button type="button">입력값 확인</button>
+            <button type="submit" id="post">제출하기</button>
         </p>
     </form>
 
@@ -102,11 +102,11 @@
     ================================================================================
      [원인 기록란] - 여기를 채우는 것이 이 문제의 핵심이다.
 
-     증상 1의 원인 :
-     증상 2의 원인 :
-     증상 3의 원인 :
-     증상 4의 원인 :
-     증상 5의 원인 :
+     증상 1의 원인 : label의 for 값과 이름 input의 id 값이 달라 서로 연결되지 않았기 때문이다.
+     증상 2의 원인 : 라디오 버튼의 name 값이 서로 달라 각각 다른 그룹으로 인식되었기 때문이다.
+     증상 3의 원인 : 이메일 input에 name 속성이 없어 입력값이 폼 데이터에 포함되지 않았기 때문이다.
+     증상 4의 원인 : 입력값 확인 button에 type을 지정하지 않아 기본값인 submit으로 동작했기 때문이다.
+     증상 5의 원인 : 수강 과목 체크박스에 disabled 속성이 있어 선택할 수 없었기 때문이다.
 
      "고쳤다"로 끝내지 말고 반드시 원인을 문장으로 적어본다.
      말로 설명할 수 있어야 나중에 AI에게도 지시할 수 있다.
