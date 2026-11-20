@@ -5,13 +5,13 @@
    각 줄의 출력 결과를 예상해서 적고, 실행해서 확인한다.
 */
 
-console.log(10 / 4);              // 예상 :
-console.log(10 === 10.0);         // 예상 :
-console.log(10 / 0);              // 예상 :
-console.log(-10 / 0);             // 예상 :
-console.log(1 * '문자열');         // 예상 :
-console.log(0.1 + 0.2);           // 예상 :
-console.log(0.1 + 0.2 === 0.3);   // 예상 :
+console.log(10 / 4);              // 예상 : 2.5
+console.log(10 === 10.0);         // 예상 : 같다 trye
+console.log(10 / 0);              // 예상 : Infinity
+console.log(-10 / 0);             // 예상 : -Infinity
+console.log(1 * '문자열');         // 예상 : NaN
+console.log(0.1 + 0.2);           // 예상 : 0.30000000004
+console.log(0.1 + 0.2 === 0.3);   // 예상 : false
 
 // 질문. 자바에서 10 / 0 을 실행하면 어떻게 되는지, 자바스크립트와 무엇이 다른지 적어 보자.
 // 답 :

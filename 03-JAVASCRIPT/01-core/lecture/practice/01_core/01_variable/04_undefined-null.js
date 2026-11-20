@@ -13,7 +13,7 @@
 let a;
 let b = null;
 
-console.log(a);                    // 예상 :
+console.log(a);                    // 예상 : 
 console.log(typeof a);             // 예상 :
 console.log(b);                    // 예상 :
 console.log(typeof b);             // 예상 :

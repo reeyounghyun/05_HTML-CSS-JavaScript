@@ -7,18 +7,18 @@
           연산은 왼쪽부터 차례대로 진행된다.
 */
 
-console.log(10 + '20');        // 예상 :
-console.log('10' - 5);         // 예상 :
-console.log('3' * '4');        // 예상 :
-console.log(10 % 'abc');       // 예상 :
-console.log('5' + 5 + 5);      // 예상 :
-console.log(5 + 5 + '5');      // 예상 :
-console.log(0 == '');          // 예상 :
-console.log(0 === '');         // 예상 :
-console.log(0 == false);       // 예상 :
+console.log(10 + "20"); // 예상 : 1020
+console.log("10" - 5); // 예상 : 5
+console.log("3" * "4"); // 예상 : 12
+console.log(10 % "abc"); // 예상 : NaN
+console.log("5" + 5 + 5); // 예상 : 555
+console.log(5 + 5 + "5"); // 예상 : 105
+console.log(0 == ""); // 예상 : true
+console.log(0 === ""); // 예상 : false
+console.log(0 == false); // 예상 : true
 
 // 질문. 입력창에서 읽은 값 '10' 에 1 을 더했더니 '101' 이 나왔다. 어떻게 고쳐야 11 이 나올까?
 const inputValue = '10';
-console.log(inputValue + 1);   // '101'
+console.log(inputValue + 1); // '101'
 // TODO : 11 이 나오도록 아래 줄을 고친다.
-console.log(inputValue + 1);
+console.log(Number(inputValue) + 1);

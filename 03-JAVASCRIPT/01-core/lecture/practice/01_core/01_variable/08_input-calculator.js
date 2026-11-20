@@ -14,17 +14,36 @@
 
 // 지금은 버그가 있는 상태다. 실행해서 결과를 먼저 확인해 보자.
 function sum(a, b) {
-    return a + b;
+  // 1. 두 값을 숫자로 변환 ('10px'은 잘못된 입력 → Number 사용)
+  const numA = Number(a);
+  const numB = Number(b);
+
+  // 2. 하나라도 숫자가 아니면
+  if (Number.isNaN(numA) || Number.isNaN(numB)) {
+    return "숫자를 입력하세요";
+  }
+
+  // 3. 둘 다 숫자면 합계
+  return numA + numB;
 }
 
 function makeMessage(a, b) {
-    // TODO
+  // TODO
+  const result = sum(a, b); // 위에서 만든 sum을 재사용
+
+  // 잘못된 입력이면
+  if (result === "숫자를 입력하세요") {
+    return `계산할 수 없습니다 : ${result}`;
+  }
+
+  // 정상 입력이면
+  return `${a} + ${b} = ${result}`;
 }
 
-console.log(sum('15', '7'));             // 기대 : 22
-console.log(sum('3.5', '1.5'));          // 기대 : 5
-console.log(sum('10', 'abc'));           // 기대 : 숫자를 입력하세요
-console.log(sum('10px', '5'));           // 기대 : 숫자를 입력하세요
+console.log(sum("15", "7")); // 기대 : 22
+console.log(sum("3.5", "1.5")); // 기대 : 5
+console.log(sum("10", "abc")); // 기대 : 숫자를 입력하세요
+console.log(sum("10px", "5")); // 기대 : 숫자를 입력하세요
 
-console.log(makeMessage('15', '7'));     // 기대 : 15 + 7 = 22
-console.log(makeMessage('10', 'abc'));   // 기대 : 계산할 수 없습니다 : 숫자를 입력하세요
+console.log(makeMessage("15", "7")); // 기대 : 15 + 7 = 22
+console.log(makeMessage("10", "abc")); // 기대 : 계산할 수 없습니다 : 숫자를 입력하세요

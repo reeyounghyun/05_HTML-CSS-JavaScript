@@ -6,15 +6,15 @@
    예상과 다른 줄이 있다면 왜 그런지 한 줄로 이유를 적는다.
 */
 
-console.log(typeof 10);              // 예상 :
-console.log(typeof 10.5);            // 예상 :
-console.log(typeof 'hello');         // 예상 :
-console.log(typeof `template`);      // 예상 :
-console.log(typeof true);            // 예상 :
-console.log(typeof undefined);       // 예상 :
-console.log(typeof null);            // 예상 :
-console.log(typeof {});              // 예상 :
-console.log(typeof []);              // 예상 :
-console.log(typeof function () {});  // 예상 :
-console.log(typeof NaN);             // 예상 :
-console.log(typeof '10');            // 예상 :
+console.log(typeof 10); // 예상 : 숫자 number
+console.log(typeof 10.5); // 예상 : 숫자 number
+console.log(typeof "hello"); // 예상 : 문자 string
+console.log(typeof `template`); // 예상 : 문자 string
+console.log(typeof true); // 예상 : 블린 boolean
+console.log(typeof undefined); // 예상 : nudefinde
+console.log(typeof null); // 예상 : boolean
+console.log(typeof {}); // 예상 : object
+console.log(typeof []); // 예상 : object
+console.log(typeof function () {}); // 예상 : function
+console.log(typeof NaN); // 예상 : 숫자 number
+console.log(typeof "10"); // 예상 : 문자 string

@@ -13,32 +13,39 @@
 */
 
 // [1] Truthy 면 T, Falsy 면 F 로 예상을 적는다.
-console.log(Boolean(0));           // 예상 :
-console.log(Boolean(-1));          // 예상 :
-console.log(Boolean(''));          // 예상 :
-console.log(Boolean(' '));         // 예상 :
-console.log(Boolean('0'));         // 예상 :
-console.log(Boolean('false'));     // 예상 :
-console.log(Boolean(null));        // 예상 :
-console.log(Boolean(undefined));   // 예상 :
-console.log(Boolean(NaN));         // 예상 :
-console.log(Boolean([]));          // 예상 :
-console.log(Boolean({}));          // 예상 :
-
+console.log(Boolean(0)); // 예상 : F
+console.log(Boolean(-1)); // 예상 : T
+console.log(Boolean("")); // 예상 : F
+console.log(Boolean(" ")); // 예상 : T
+console.log(Boolean("0")); // 예상 : T
+console.log(Boolean("false")); // 예상 : T
+console.log(Boolean(null)); // 예상 : F
+console.log(Boolean(undefined)); // 예상 : F
+console.log(Boolean(NaN)); // 예상 : F
+console.log(Boolean([])); // 예상 : T
+console.log(Boolean({})); // 예상 : T
 
 // [2] countFalsy
 function countFalsy(arr) {
-    // TODO
+  // TODO
+  let count = 0;
+  for (const item of arr) {
+    if (!item) {
+      count++;
+    }
+  }
+  return count;
 }
 
-console.log(countFalsy([0, 1, '', 'a', null, [], NaN]));   // 기대 : 4
-console.log(countFalsy(['hello', 10, {}, []]));            // 기대 : 0
-
+console.log(countFalsy([0, 1, "", "a", null, [], NaN])); // 기대 : 4
+console.log(countFalsy(["hello", 10, {}, []])); // 기대 : 0
 
 // [3] hasItems
 function hasItems(list) {
-    // TODO
+  // TODO
+  // 빈 배열 []도 Truthy라서 if (list)로는 비었는지 알 수 없다 -> length로 확인
+  return list.length > 0;
 }
 
-console.log(hasItems([1, 2, 3]));   // 기대 : true
-console.log(hasItems([]));          // 기대 : false
+console.log(hasItems([1, 2, 3])); // 기대 : true
+console.log(hasItems([])); // 기대 : false
