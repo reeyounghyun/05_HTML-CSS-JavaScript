@@ -15,41 +15,56 @@
 
 // [1]
 function printMenu(menu) {
-    // TODO
+  menu.forEach(function (item, index) {
+    console.log(`${index + 1}번 메뉴 : ${item}`);
+  });
 }
-printMenu(['김밥', '라면']);
+printMenu(["김밥", "라면"]);
 // 기대 :
 // 1번 메뉴 : 김밥
 // 2번 메뉴 : 라면
 
-
 // [2]
 function getNames(users) {
-    // TODO
+  return users.map((user) => user.name);
 }
 function addVat(prices) {
-    // TODO
+    return prices.map((price) => Math.round(price * 1.1));
 }
 function toLabels(todos) {
-    // TODO
+    return todos.map((todo) => (todo.done ? `✔ ${todo.text}` : `☐ ${todo.text}`));
 }
 function addPassed(students) {
-    // TODO
+    return students.map((student) => ({ ...student, passed: student.score >= 80 }));
 }
 
-console.log(getNames([{ id: 1, name: '유관순' }, { id: 2, name: '홍길동' }]));   // 기대 : [ '유관순', '홍길동' ]
-console.log(addVat([1000, 2500, 999]));                                          // 기대 : [ 1100, 2750, 1099 ]
-console.log(toLabels([{ text: '장보기', done: true }, { text: '운동', done: false }]));
+console.log(
+  getNames([
+    { id: 1, name: "유관순" },
+    { id: 2, name: "홍길동" },
+  ])
+); // 기대 : [ '유관순', '홍길동' ]
+console.log(addVat([1000, 2500, 999])); // 기대 : [ 1100, 2750, 1099 ]
+console.log(
+  toLabels([
+    { text: "장보기", done: true },
+    { text: "운동", done: false },
+  ])
+);
 // 기대 : [ '✔ 장보기', '☐ 운동' ]
 
-const students = [{ name: '유관순', score: 90 }, { name: '장보고', score: 70 }];
+const students = [
+  { name: "유관순", score: 90 },
+  { name: "장보고", score: 70 },
+];
 console.log(addPassed(students));
 // 기대 : [ { name: '유관순', score: 90, passed: true }, { name: '장보고', score: 70, passed: false } ]
 console.log(students);
 // 기대 : [ { name: '유관순', score: 90 }, { name: '장보고', score: 70 } ]   (원본 그대로)
 
-
 // [3]
-const result = [1, 2, 3].forEach(n => n * 2);
-console.log(result);   // undefined
+const result = [1, 2, 3].forEach((n) => n * 2);
+console.log(result); // undefined
 // 이유 :
+
+// 꼭풀기

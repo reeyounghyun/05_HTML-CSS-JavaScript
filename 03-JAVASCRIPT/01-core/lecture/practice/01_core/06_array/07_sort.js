@@ -11,41 +11,41 @@
 */
 
 // [1]
-console.log([10, 9, 100, 1, 25].sort());                 // 예상 :
-console.log([10, 9, 100, 1, 25].sort((a, b) => a - b));  // 예상 :
-console.log(['banana', 'apple', 'cherry'].sort());       // 예상 :
-
+console.log([10, 9, 100, 1, 25].sort()); // 예상 : [1, 10, 100, 25, 9]  (숫자를 글자처럼 비교해서 "1"로 시작하는 게 앞)
+console.log([10, 9, 100, 1, 25].sort((a, b) => a - b)); // 예상 : [1, 9, 10, 25, 100]
+console.log(["banana", "apple", "cherry"].sort()); // 예상 : ['apple', 'banana', 'cherry']  (알파벳 순)
 
 // [2]
 function sortAsc(numbers) {
-    // TODO
+  return [...numbers].sort((a, b) => a - b);
 }
 function sortDesc(numbers) {
-    // TODO
+  return [...numbers].sort((a, b) => b - a);
 }
 function sortByPrice(products) {
-    // TODO
+  return [...products].sort((a, b) => a.price - b.price);
 }
 function getTopScorer(students) {
-    // TODO
+  const sorted = [...students].sort((a, b) => b.score - a.score);
+  return sorted[0].name;
 }
 
 const nums = [30, 5, 100, 12];
-console.log(sortAsc(nums));    // 기대 : [ 5, 12, 30, 100 ]
-console.log(sortDesc(nums));   // 기대 : [ 100, 30, 12, 5 ]
-console.log(nums);             // 기대 : [ 30, 5, 100, 12 ]   (원본 그대로)
+console.log(sortAsc(nums)); // 기대 : [ 5, 12, 30, 100 ]
+console.log(sortDesc(nums)); // 기대 : [ 100, 30, 12, 5 ]
+console.log(nums); // 기대 : [ 30, 5, 100, 12 ]   (원본 그대로)
 
 const products = [
-    { name: '모니터', price: 250000 },
-    { name: '마우스', price: 20000 },
-    { name: '키보드', price: 45000 }
+  { name: "모니터", price: 250000 },
+  { name: "마우스", price: 20000 },
+  { name: "키보드", price: 45000 },
 ];
 console.log(sortByPrice(products));
 // 기대 : 마우스(20000) → 키보드(45000) → 모니터(250000) 순서의 배열
 
 const students = [
-    { name: '유관순', score: 88 },
-    { name: '홍길동', score: 95 },
-    { name: '장보고', score: 72 }
+  { name: "유관순", score: 88 },
+  { name: "홍길동", score: 95 },
+  { name: "장보고", score: 72 },
 ];
-console.log(getTopScorer(students));   // 기대 : 홍길동
+console.log(getTopScorer(students)); // 기대 : 홍길동

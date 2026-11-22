@@ -11,7 +11,7 @@
 */
 
 function getEvens(numbers) {
-    // TODO
+    return numbers.filter((n) => n % 2)
 }
 function getPassed(students, min) {
     // TODO
@@ -45,3 +45,5 @@ console.log(removeEmpty(['A', '', null, 'B', undefined, 'C']));   // 기대 : [ 
 const users = [{ name: '김철수' }, { name: '이영희' }, { name: '김민수' }];
 console.log(searchByName(users, '김'));          // 기대 : 김철수, 김민수가 담긴 배열
 console.log(searchByName(users, '수'));          // 기대 : 김철수, 김민수가 담긴 배열
+
+// 꼭풀기

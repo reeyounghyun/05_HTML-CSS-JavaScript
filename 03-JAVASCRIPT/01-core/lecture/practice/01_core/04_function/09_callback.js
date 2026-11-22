@@ -12,33 +12,43 @@
 
 // [1]
 function calculate(a, b, operator) {
-    // TODO
+  // TODO
+  return operator(a, b);
 }
-// TODO : add, subtract 함수
+function add(a, b) {
+  return a + b;
+}
 
-// console.log(calculate(10, 5, add));         // 기대 : 15
-// console.log(calculate(10, 5, subtract));    // 기대 : 5
+function subtract(a, b) {
+  return a - b;
+}
+console.log(calculate(10, 5, add)); // 기대 : 15
+console.log(calculate(10, 5, subtract)); // 기대 : 5
 // console.log(calculate(10, 5, /* TODO */));  // 기대 : 50
-
 
 // [2]
 function repeat(n, action) {
-    // TODO
+  // TODO
+  for (let i = 1; i <= n; i++) {
+    action(i);
+  }
 }
-repeat(3, i => console.log(`${i}번째 실행`));
+repeat(3, (i) => console.log(`${i}번째 실행`));
 // 기대 :
 // 1번째 실행
 // 2번째 실행
 // 3번째 실행
 
-
 // [3]
 function sayHello() {
-    console.log('안녕하세요!');
+  console.log("안녕하세요!");
 }
 function runLater(callback) {
-    console.log('준비...');
-    callback();
+  console.log("준비...");
+  callback();
 }
-// runLater(sayHello());   // 주석을 풀어서 실행해 보고 고친다.
-// 원인 :
+runLater(sayHello);   // 주석을 풀어서 실행해 보고 고친다.
+// 원인 : sayHello() 처럼 괄호를 붙이면 함수가 바로 실행되고, 그 결과(undefined)가 넘어간다.
+//        그래서 runLater 안에서 undefined() 를 실행하려다 "callback is not a function" 오류가 났다.
+//        함수 자체를 넘기려면 괄호 없이 sayHello 로 써야 한다.
+
