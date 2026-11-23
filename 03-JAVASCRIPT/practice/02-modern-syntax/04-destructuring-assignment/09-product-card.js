@@ -15,28 +15,40 @@
 */
 
 // [1]
-function ProductCard(props) {
-    // TODO
+function ProductCard({ name, price = 0, discountRate = 0, tags = [] }) {
+  // TODO
+  const safaPrice = price ?? 0;
+  const finalPrice = Math.round(safaPrice * (1 - discountRate));
+  return `${name} | ${finalPrice.toLocaleString("ko-KR")}원${tags}`;
 }
 
-console.log(ProductCard({ name: '무선 마우스', price: 30000, discountRate: 0.1, tags: ['신상', '인기'] }));
+console.log(
+  ProductCard({
+    name: "무선 마우스",
+    price: 30000,
+    discountRate: 0.1,
+    tags: ["신상", "인기"],
+  }),
+);
 // 기대 : 무선 마우스 | 27,000원 (10% 할인) | #신상 #인기
-console.log(ProductCard({ name: '키보드', price: 45000 }));
+console.log(ProductCard({ name: "키보드", price: 45000 }));
 // 기대 : 키보드 | 45,000원
-console.log(ProductCard({ name: '마우스패드', price: null }));
+console.log(ProductCard({ name: "마우스패드", price: null }));
 // 기대 : 마우스패드 | 0원
-
 
 // [2]
 function renderList(products, commonTag) {
-    // TODO
+  return products.map((product) => {
+    const newProduct = { ...product, tags: [commonTag, ...(product.tags ?? [])] };
+    return ProductCard(newProduct);
+  });
 }
 
 const products = [
-    { name: '키보드', price: 45000 },
-    { name: '모니터', price: 300000, discountRate: 0.2, tags: ['한정'] }
+  { name: "키보드", price: 45000 },
+  { name: "모니터", price: 300000, discountRate: 0.2, tags: ["한정"] },
 ];
-console.log(renderList(products, 'SALE'));
+console.log(renderList(products, "SALE"));
 // 기대 : [ '키보드 | 45,000원 | #SALE', '모니터 | 240,000원 (20% 할인) | #SALE #한정' ]
 console.log(products[1].tags);
 // 기대 : [ '한정' ]   (원본 그대로)

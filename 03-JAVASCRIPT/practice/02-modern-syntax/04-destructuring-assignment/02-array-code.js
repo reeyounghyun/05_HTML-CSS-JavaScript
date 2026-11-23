@@ -11,30 +11,38 @@
 
 // [1]
 function splitName(fullName) {
-    // TODO
+  const [lastName, firstName] = fullName.split(" ");
+  return `성 : ${lastName}, 이름 : ${firstName}`;
 }
-console.log(splitName('홍 길동'));   // 기대 : 성 : 홍, 이름 : 길동
-
+console.log(splitName("홍 길동")); // 기대 : 성 : 홍, 이름 : 길동
 
 // [2]
-let left = '왼쪽';
-let right = '오른쪽';
+let left = "왼쪽";
+let right = "오른쪽";
 // TODO : 한 줄로 맞바꾸기
-console.log(left, right);            // 기대 : 오른쪽 왼쪽
-
+[left, right] = [right, left]; // 코드 추가(정답)
+console.log(left, right); // 기대 : 오른쪽 왼쪽
 
 // [3]
 function getHeadAndTail(list) {
-    // TODO
+  const [head, ...tail] = list;
+  return { head, tail };
 }
-console.log(getHeadAndTail([1, 2, 3, 4]));   // 기대 : { head: 1, tail: [ 2, 3, 4 ] }
-
+console.log(getHeadAndTail([1, 2, 3, 4])); // 기대 : { head: 1, tail: [ 2, 3, 4 ] }
 
 // [4]
 function createState(initial) {
-    // TODO
+  // TODO
+  let value = initial;
+
+  const get = () => value;
+  const set = (newValue) => {
+    value = newValue;
+  };
+
+  return [get, set];
 }
-// const [getCount, setCount] = createState(0);
-// console.log(getCount());   // 기대 : 0
-// setCount(5);
-// console.log(getCount());   // 기대 : 5
+const [getCount, setCount] = createState(0);
+console.log(getCount()); // 기대 : 0
+setCount(5);
+console.log(getCount()); // 기대 : 5

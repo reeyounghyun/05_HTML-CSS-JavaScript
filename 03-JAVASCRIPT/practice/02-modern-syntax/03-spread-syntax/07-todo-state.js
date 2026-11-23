@@ -14,38 +14,46 @@
 */
 
 function addTodo(todos, text) {
-    // TODO
+  // TODO
+  const nextId = todos.length === 0 ? 1 : todos[todos.length - 1].id + 1;
+  return [...todos, { id: nextId, text, done: false }];
 }
 function toggleTodo(todos, id) {
-    // TODO
+  // TODO
+  return todos.map((todo) =>
+    todo.id === id ? { ...todo, done: !todo.done } : todo,
+  );
 }
 function editTodo(todos, id, text) {
-    // TODO
+  // TODO
+  return todos.map((todo) => (todo.id === id ? { ...todo, text } : todo));
 }
 function removeTodo(todos, id) {
-    // TODO
+  // TODO
+  return todos.filter((todo) => todo.id !== id);
 }
 function clearDone(todos) {
-    // TODO
+  // TODO
+  return todos.filter((todo) => !todo.done);
 }
 
 const todos = [
-    { id: 1, text: '장보기', done: false },
-    { id: 2, text: '운동하기', done: true }
+  { id: 1, text: "장보기", done: false },
+  { id: 2, text: "운동하기", done: true },
 ];
 
-console.log(addTodo(todos, '책 읽기'));
+console.log(addTodo(todos, "책 읽기"));
 // 기대 : 세 번째 항목 { id: 3, text: '책 읽기', done: false } 가 추가된 배열
-console.log(addTodo([], '첫 할 일'));
+console.log(addTodo([], "첫 할 일"));
 // 기대 : [ { id: 1, text: '첫 할 일', done: false } ]
 
 const toggled = toggleTodo(todos, 1);
-console.log(toggled?.[0]);                   // 기대 : { id: 1, text: '장보기', done: true }
-console.log(toggled?.[1] === todos[1]);      // 기대 : true   (바뀌지 않은 항목은 같은 객체)
+console.log(toggled?.[0]); // 기대 : { id: 1, text: '장보기', done: true }
+console.log(toggled?.[1] === todos[1]); // 기대 : true   (바뀌지 않은 항목은 같은 객체)
 
-console.log(editTodo(todos, 2, '산책하기')?.[1]);   // 기대 : { id: 2, text: '산책하기', done: true }
-console.log(removeTodo(todos, 1));                 // 기대 : [ { id: 2, text: '운동하기', done: true } ]
-console.log(clearDone(todos));                     // 기대 : [ { id: 1, text: '장보기', done: false } ]
+console.log(editTodo(todos, 2, "산책하기")?.[1]); // 기대 : { id: 2, text: '산책하기', done: true }
+console.log(removeTodo(todos, 1)); // 기대 : [ { id: 2, text: '운동하기', done: true } ]
+console.log(clearDone(todos)); // 기대 : [ { id: 1, text: '장보기', done: false } ]
 
 console.log(todos);
 // 기대 : 원본 그대로 [ { id: 1, text: '장보기', done: false }, { id: 2, text: '운동하기', done: true } ]

@@ -11,27 +11,26 @@
 
 // [1]
 function sum(...numbers) {
-    // TODO
+  // TODO
+  return numbers.reduce((acc, cur) => acc + cur, 0);
 }
-console.log(sum(1, 2, 3, 4));   // 기대 : 10
-console.log(sum());             // 기대 : 0
-
+console.log(sum(1, 2, 3, 4)); // 기대 : 10
+console.log(sum()); // 기대 : 0
 
 // [2]
 function average(...numbers) {
-    // TODO
+  if (numbers.length === 0) return 0;
+  return sum(...numbers) / numbers.length;
 }
-console.log(average(90, 80, 70));   // 기대 : 80
-console.log(average());             // 기대 : 0
-
+console.log(average(90, 80, 70)); // 기대 : 80
+console.log(average()); // 기대 : 0
 
 // [3]
 function introduce(name, ...hobbies) {
-    // TODO
+  // TODO
 }
-console.log(introduce('유관순', '독서', '달리기'));   // 기대 : 유관순의 취미 : 독서, 달리기
-console.log(introduce('홍길동'));                     // 기대 : 홍길동의 취미 : 없음
-
+console.log(introduce("유관순", "독서", "달리기")); // 기대 : 유관순의 취미 : 독서, 달리기
+console.log(introduce("홍길동")); // 기대 : 홍길동의 취미 : 없음
 
 // [4]
 // 이유 :

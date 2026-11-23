@@ -9,25 +9,34 @@
 */
 
 const response = {
-    user: { name: '유관순', address: { city: '천안', zip: '31000' } },
-    posts: ['첫 글', '두 번째 글']
+  user: { name: "유관순", address: { city: "천안", zip: "31000" } },
+  posts: ["첫 글", "두 번째 글"],
 };
 
 // [1] TODO
-// console.log(userName, city, firstPost);   // 기대 : 유관순 천안 첫 글
-
+const {
+  user: {
+    name: userName,
+    address: { city },
+  },
+  posts: [firstPost],
+} = response;
+console.log(userName, city, firstPost); // 기대 : 유관순 천안 첫 글
 
 // [2]
 const product = { size: { width: 10, height: 20 } };
-const { size: { width } } = product;
-console.log(width);     // 예상 :
-// console.log(size);   // 예상 :
-
+const {
+  size: { width },
+} = product;
+console.log(width); // 예상 : 10
+// console.log(size); // 예상 : ReferenceError (size is not defined) → size: 는 들어가는 길만 표시하고 변수를 만들지 않는다.
 
 // [3]
 function getCity(response) {
-    // TODO
+  // TODO
+  const { user: { address: { city } = {} } = {} } = response;
+  return city;
 }
-console.log(getCity(response));     // 기대 : 천안
+console.log(getCity(response)); // 기대 : 천안
 console.log(getCity({ user: {} })); // 기대 : undefined
-console.log(getCity({}));           // 기대 : undefined
+console.log(getCity({})); // 기대 : undefined

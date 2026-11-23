@@ -7,19 +7,30 @@
 
 const scores = { math: 90, english: 75, korean: 85 };
 
-// [1]
-for (const entry of Object.entries(scores)) {
-    console.log(`${entry[0]} : ${entry[1]}점`);
+// [1] 해결완료
+for (const [subject, score] of Object.entries(scores)) {
+  // console.log(`${entry[0]} : ${entry[1]}점`);
+  console.log(`${subject} : ${score}점`);
 }
 
 // [2]
-const query = Object.entries(scores).map(entry => `${entry[0]}=${entry[1]}`).join('&');
-console.log(query);    // math=90&english=75&korean=85
+const query = Object.entries(scores)
+  // .map((entry) => `${entry[0]}=${entry[1]}`)
+  .map(([subject, score]) => `${subject}=${score}`)
+  .join("&");
+console.log(query); // math=90&english=75&korean=85
 
 // [3]
-const passed = Object.fromEntries(Object.entries(scores).filter(entry => entry[1] >= 80));
-console.log(passed);   // { math: 90, korean: 85 }
+const passed = Object.fromEntries(
+  // Object.entries(scores).filter((entry) => entry[1] >= 80),
+  Object.entries(scores).filter(([, score]) => score >= 80),
+);
+console.log(passed); // { math: 90, korean: 85 }
 
 // [4]
-const best = Object.entries(scores).toSorted((a, b) => b[1] - a[1])[0];
-console.log(`최고 과목 : ${best[0]} (${best[1]}점)`);   // 최고 과목 : math (90점)
+// const best = Object.entries(scores).toSorted((a, b) => b[1] - a[1])[0];
+// console.log(`최고 과목 : ${best[0]} (${best[1]}점)`); // 최고 과목 : math (90점)
+const [bestSubject, bestScore] = Object.entries(scores).toSorted(
+  ([, scoreA], [, scoreB]) => scoreB - scoreA,
+)[0];
+console.log(`최고 과목 : ${bestSubject} (${bestScore}점)`); // 최고 과목 : math (90점)

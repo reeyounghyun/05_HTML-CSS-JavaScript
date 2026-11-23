@@ -10,20 +10,25 @@
 
 // [1]
 function toPublicUser(user) {
-    // TODO
+  // TODO
+  const { password, token, ...publicUser } = user;
+  return publicUser;
 }
-const user = { id: 1, name: '유관순', password: 'secret', token: 'abc123' };
-console.log(toPublicUser(user));   // 기대 : { id: 1, name: '유관순' }
-console.log(user);                 // 기대 : 원본 그대로 { id: 1, name: '유관순', password: 'secret', token: 'abc123' }
-
+const user = { id: 1, name: "유관순", password: "secret", token: "abc123" };
+console.log(toPublicUser(user)); // 기대 : { id: 1, name: '유관순' }
+console.log(user); // 기대 : 원본 그대로 { id: 1, name: '유관순', password: 'secret', token: 'abc123' }
 
 // [2]
 function splitProps(props) {
-    // TODO
+  // TODO
+  const { label, ...inputProps } = props;
+  return { label, inputProps };
 }
-console.log(splitProps({ label: '이메일', type: 'email', placeholder: '입력하세요' }));
+console.log(
+  splitProps({ label: "이메일", type: "email", placeholder: "입력하세요" }),
+);
 // 기대 : { label: '이메일', inputProps: { type: 'email', placeholder: '입력하세요' } }
 
-
 // [3]
-// 이유 :
+// 이유 : delete 는 원본 객체에서 프로퍼티를 직접 지워서 원본이 바뀐다.
+//        구조 분해 + rest 는 원본은 그대로 두고, 필요한 프로퍼티만 담은 새 객체를 만들기 때문에 원본을 지킬 수 있다.

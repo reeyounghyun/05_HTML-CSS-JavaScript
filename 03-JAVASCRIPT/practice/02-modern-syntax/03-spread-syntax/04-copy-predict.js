@@ -10,23 +10,21 @@ const b = a;
 const c = [...a];
 b.push(3);
 
-console.log(a);              // 예상 :
-console.log(c);              // 예상 :
-console.log(a === b);        // 예상 :
-console.log(a === c);        // 예상 :
+console.log(a); // 예상 :1,2,3
+console.log(c); // 예상 :1,2
+console.log(a === b); // 예상 : 같다
+console.log(a === c); // 예상 : 다르다
 
-
-const user = { name: '홍길동', address: { city: '서울' } };
+const user = { name: "홍길동", address: { city: "서울" } };
 const copy = { ...user };
-copy.name = '유관순';
-copy.address.city = '부산';
+copy.name = "유관순";
+copy.address.city = "부산";
 
-console.log(user.name);                       // 예상 :
-console.log(user.address.city);               // 예상 :
-console.log(user.address === copy.address);   // 예상 :
-
+console.log(user.name); // 예상 : 홍길동
+console.log(user.address.city); // 예상 : 부산
+console.log(user.address === copy.address); // 예상 : 같다
 
 const deep = structuredClone(user);
-deep.address.city = '대전';
+deep.address.city = "대전";
 
-console.log(user.address.city);               // 예상 :
+console.log(user.address.city); // 예상 : 부산

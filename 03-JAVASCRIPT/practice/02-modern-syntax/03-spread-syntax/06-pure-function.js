@@ -9,33 +9,36 @@
 */
 
 function addItem(cart, item) {
-    cart.push(item);
-    return cart;
+  cart.push(item);
+  return [...cart, item];
 }
 
 function removeItem(cart, index) {
-    cart.splice(index, 1);
-    return cart;
+  cart.splice(index, 1);
+  return [...cart.slice(0, index), ...cart.slice(index + 1)];
 }
 
 function sortByPrice(products) {
-    return products.sort((a, b) => a.price - b.price);
+  return [...products].sort((a, b) => a.price - b.price);
 }
 
 function levelUp(user) {
-    user.level = user.level + 1;
-    return user;
+  user.level = user.level + 1;
+  return { ...user, level: user.level + 1 };
 }
 
-const cart = ['사과', '우유'];
-console.log(addItem(cart, '빵'));      // 기대 : [ '사과', '우유', '빵' ]
-console.log(removeItem(cart, 0));      // 기대 : [ '우유' ]
-console.log(cart);                     // 기대 : [ '사과', '우유' ]   (원본 그대로)
+const cart = ["사과", "우유"];
+console.log(addItem(cart, "빵")); // 기대 : [ '사과', '우유', '빵' ]
+console.log(removeItem(cart, 0)); // 기대 : [ '우유' ]
+console.log(cart); // 기대 : [ '사과', '우유' ]   (원본 그대로)
 
-const products = [{ name: 'B', price: 300 }, { name: 'A', price: 100 }];
-console.log(sortByPrice(products).map(p => p.name));   // 기대 : [ 'A', 'B' ]
-console.log(products.map(p => p.name));                // 기대 : [ 'B', 'A' ]   (원본 그대로)
+const products = [
+  { name: "B", price: 300 },
+  { name: "A", price: 100 },
+];
+console.log(sortByPrice(products).map((p) => p.name)); // 기대 : [ 'A', 'B' ]
+console.log(products.map((p) => p.name)); // 기대 : [ 'B', 'A' ]   (원본 그대로)
 
-const member = { name: '유관순', level: 1 };
-console.log(levelUp(member));          // 기대 : { name: '유관순', level: 2 }
-console.log(member);                   // 기대 : { name: '유관순', level: 1 }   (원본 그대로)
+const member = { name: "유관순", level: 1 };
+console.log(levelUp(member)); // 기대 : { name: '유관순', citylevel: 2 }
+console.log(member); // 기대 : { name: '유관순', level: 1 }   (원본 그대로)

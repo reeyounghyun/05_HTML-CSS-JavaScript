@@ -11,24 +11,29 @@
 */
 
 function merge(a, b) {
-    // TODO
+  // TODO
+  return [...a, ...b];
 }
 function prepend(list, item) {
-    // TODO
+  // TODO
+  return [item, ...list];
 }
 function insertAt(list, index, item) {
-    // TODO
+  // TODO
+  return [...list.slice(0, index), item, ...list.slice(index)];
 }
 function getMax(numbers) {
-    // TODO
+  // TODO
+  return Math.max(...numbers);
 }
-function createButton(options) {
-    // TODO
+function createButton(options = {}) {
+  // TODO
+  return { type: "button", size: "md", disabled: false, ...options };
 }
 
-console.log(merge([1, 2], [3]));              // 기대 : [ 1, 2, 3 ]
-console.log(prepend(['b', 'c'], 'a'));        // 기대 : [ 'a', 'b', 'c' ]
-console.log(insertAt(['a', 'c'], 1, 'b'));    // 기대 : [ 'a', 'b', 'c' ]
-console.log(getMax([3, 17, 8]));              // 기대 : 17
-console.log(createButton({ size: 'lg' }));    // 기대 : { type: 'button', size: 'lg', disabled: false }
-console.log(createButton());                  // 기대 : { type: 'button', size: 'md', disabled: false }
+console.log(merge([1, 2], [3])); // 기대 : [ 1, 2, 3 ]
+console.log(prepend(["b", "c"], "a")); // 기대 : [ 'a', 'b', 'c' ]
+console.log(insertAt(["a", "c"], 1, "b")); // 기대 : [ 'a', 'b', 'c' ]
+console.log(getMax([3, 17, 8])); // 기대 : 17
+console.log(createButton({ size: "lg" })); // 기대 : { type: 'button', size: 'lg', disabled: false }
+console.log(createButton()); // 기대 : { type: 'button', size: 'md', disabled: false }

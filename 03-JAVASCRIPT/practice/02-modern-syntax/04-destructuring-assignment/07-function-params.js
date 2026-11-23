@@ -9,14 +9,23 @@
    [2] 고친 createPost 를 인수 없이 호출해도 오류가 나지 않게 한다.
 */
 
-function createPost(title, writer = '익명', category = '자유', isPublic = true) {
-    return `[${category}] ${title} - ${writer} (${isPublic ? '공개' : '비공개'})`;
+function createPost({
+  title = "제목 없음",
+  writer = "익명",
+  category = "자유",
+  isPublic = true,
+} = {}) {
+  return `[${category}] ${title} - ${writer} (${isPublic ? "공개" : "비공개"})`;
 }
 
-console.log(createPost('첫 글'));
-console.log(createPost('공지', undefined, '공지사항', false));
+//console.log(createPost("첫 글"));
+//console.log(createPost("공지", undefined, "공지사항", false));
 
 // 고친 뒤에는 아래처럼 호출한다. 위 두 줄을 지우고 주석을 풀어 확인한다.
-// console.log(createPost({ title: '첫 글' }));                                     // 기대 : [자유] 첫 글 - 익명 (공개)
-// console.log(createPost({ title: '공지', category: '공지사항', isPublic: false }));  // 기대 : [공지사항] 공지 - 익명 (비공개)
-// console.log(createPost());                                                        // 기대 : [자유] 제목 없음 - 익명 (공개)
+console.log(
+  "고친 뒤에는 아래처럼 호출한다. 위 두 줄을 지우고 주석을 풀어 확인한다.",
+);
+
+console.log(createPost({ title: "첫 글" })); // 기대 : [자유] 첫 글 - 익명 (공개)
+console.log(createPost({ title: '공지', category: '공지사항', isPublic: false }));  // 기대 : [공지사항] 공지 - 익명 (비공개)
+console.log(createPost());                                                        // 기대 : [자유] 제목 없음 - 익명 (공개)

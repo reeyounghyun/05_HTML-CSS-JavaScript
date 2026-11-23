@@ -12,22 +12,30 @@
 
 // [1]
 function toViewModel(response) {
-    // TODO
-}
-console.log(toViewModel({ user_id: 7, user_name: '유관순', created_at: '2026-09-15' }));
-// 기대 : { userId: 7, userName: '유관순', createdAt: '2026-09-15' }
+  // TODO
 
+  const {
+    user_id: userId,
+    user_name: userName,
+    created_at: createdAt,
+  } = response;
+  return { userId, userName, createdAt };
+}
+console.log(
+  toViewModel({ user_id: 7, user_name: "유관순", created_at: "2026-09-15" }),
+);
+// 기대 : { userId: 7, userName: '유관순', createdAt: '2026-09-15' }
 
 // [2]
 function getDisplayInfo(user) {
-    // TODO
+  const { nickname, point } = user;
+  return `${nickname ?? "익명"}님 (${point ?? 0}P)`;
 }
-console.log(getDisplayInfo({ nickname: '길동', point: 120 }));   // 기대 : 길동님 (120P)
-console.log(getDisplayInfo({}));                                 // 기대 : 익명님 (0P)
-console.log(getDisplayInfo({ nickname: null, point: null }));    // 기대 : 익명님 (0P)
-
+console.log(getDisplayInfo({ nickname: "길동", point: 120 })); // 기대 : 길동님 (120P)
+console.log(getDisplayInfo({})); // 기대 : 익명님 (0P)
+console.log(getDisplayInfo({ nickname: null, point: null })); // 기대 : 익명님 (0P)
 
 // [3]
 let title, writer;
-// { title, writer } = { title: '공지', writer: '관리자' };   // 주석을 풀면 SyntaxError 가 난다. 고친다.
-console.log(title, writer);   // 기대 : 공지 관리자
+({ title, writer } = { title: "공지", writer: "관리자" }); // 주석을 풀면 SyntaxError 가 난다. 고친다.
+console.log(title, writer); // 기대 : 공지 관리자

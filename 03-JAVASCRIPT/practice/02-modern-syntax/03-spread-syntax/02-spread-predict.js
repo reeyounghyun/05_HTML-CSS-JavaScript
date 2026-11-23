@@ -7,14 +7,14 @@
 
 const nums = [3, 7, 1];
 const more = [10, 20];
-const user = { name: '홍길동', age: 20 };
+const user = { name: "홍길동", age: 20 };
 
-console.log(Math.max(nums));              // 예상 :
-console.log(Math.max(...nums));           // 예상 :
-console.log([...nums, ...more]);          // 예상 :
-console.log([0, ...nums, 99]);            // 예상 :
-console.log([...'hi']);                   // 예상 :
-console.log({ ...user, age: 30 });        // 예상 :
-console.log({ age: 30, ...user });        // 예상 :
-console.log({ ...user, city: '서울' });   // 예상 :
-console.log(nums);                        // 예상 :
+console.log(Math.max(nums)); // 예상 : NaN
+console.log(Math.max(...nums)); // 예상 : 7
+console.log([...nums, ...more]); // 예상 : 1 3 7, 10 20 // 해결
+console.log([0, ...nums, 99]); // 예상 : 0, 1 3 7, 99 // 해결
+console.log([..."hi"]); // 예상 : 'h', 'i'
+console.log({ ...user, age: 30 }); // 예상 :  ame: '홍길동', age:30
+console.log({ age: 30, ...user }); // 예상 :   age:30, name: '홍길동'
+console.log({ ...user, city: "서울" }); // 예상 : name: '홍길동', age: 20, city: '서울' // 해결
+console.log(nums); // 예상 : 3 7 1 //해결

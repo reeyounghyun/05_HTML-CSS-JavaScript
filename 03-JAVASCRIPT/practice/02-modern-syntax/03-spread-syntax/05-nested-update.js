@@ -9,30 +9,33 @@
 */
 
 const user = {
-    name: '홍길동',
-    address: { city: '서울', zip: '04524' },
-    tags: ['신규']
+  name: "홍길동",
+  address: { city: "서울", zip: "04524" },
+  tags: ["신규"],
 };
 
 function changeName(user, name) {
-    // TODO
+  // TODO
+  return { ...user, name: "김길동" };
 }
 function changeCity(user, city) {
-    // TODO
+  // TODO
+  return { ...user, address: { ...user.address, city } };
 }
 function addTag(user, tag) {
-    // TODO
+  // TODO
+  return { ...user, tags: [...user.tags, tag] };
 }
 
-const u1 = changeName(user, '유관순');
-console.log(u1?.name);                  // 기대 : 유관순
-console.log(user.name);                 // 기대 : 홍길동
+const u1 = changeName(user, "유관순");
+console.log(u1?.name); // 기대 : 유관순
+console.log(user.name); // 기대 : 홍길동
 
-const u2 = changeCity(user, '부산');
-console.log(u2?.address);               // 기대 : { city: '부산', zip: '04524' }
-console.log(user.address.city);         // 기대 : 서울
-console.log(u2?.tags === user.tags);    // 기대 : true   (바뀌지 않은 부분은 그대로 함께 쓴다)
+const u2 = changeCity(user, "부산");
+console.log(u2?.address); // 기대 : { city: '부산', zip: '04524' }
+console.log(user.address.city); // 기대 : 서울
+console.log(u2?.tags === user.tags); // 기대 : true   (바뀌지 않은 부분은 그대로 함께 쓴다)
 
-const u3 = addTag(user, 'VIP');
-console.log(u3?.tags);                  // 기대 : [ '신규', 'VIP' ]
-console.log(user.tags);                 // 기대 : [ '신규' ]
+const u3 = addTag(user, "VIP");
+console.log(u3?.tags); // 기대 : [ '신규', 'VIP' ]
+console.log(user.tags); // 기대 : [ '신규' ]
