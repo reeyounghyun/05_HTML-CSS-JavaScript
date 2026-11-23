@@ -12,12 +12,11 @@
      합계 : 7
 */
 
-import { greet } from './utils.js';
-import { sum } from './utils';
-import { VERSOIN } from './utils.js';
-import { internal } from './utils.js';
+import greet from "./utils.js"; //4. 중괄호 삭제
+import { VERSION } from "./utils.js";
+import { sum } from "./utils.js"; // 3. 확장자 .js가 붙어있지 않음
 
-console.log(greet('유관순'));
-console.log(`버전 : ${VERSOIN}`);
+console.log(greet("유관순"));
+console.log(`버전 : ${VERSION}`); // 2. 이름에 오타가 있음
 console.log(`합계 : ${sum(3, 4)}`);
-console.log(internal);
+// 5/ console.log(internal("내부용 값")); // js에 export가 없어 불러올수가 없음

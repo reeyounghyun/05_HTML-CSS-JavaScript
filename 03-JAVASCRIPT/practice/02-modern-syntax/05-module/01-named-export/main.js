@@ -10,10 +10,13 @@
 */
 
 // TODO : import
+import { TAX_RATE } from "./calc.js";
+import { add } from "./calc.js";
+import { multiply } from "./calc.js";
+// import { secret } from "./calc.js"; // [3] 확인용 : 오류 확인 후 이 줄은 주석 처리한다
 
+console.log(add(2, 3)); // 기대 : 5
+console.log(multiply(4, 5)); // 기대 : 20
+console.log(add(10000, multiply(10000, TAX_RATE))); // 기대 : 11000   (부가세 포함 금액)
 
-// console.log(add(2, 3));                                   // 기대 : 5
-// console.log(multiply(4, 5));                              // 기대 : 20
-// console.log(add(10000, multiply(10000, TAX_RATE)));       // 기대 : 11000   (부가세 포함 금액)
-
-// [3] 오류 메시지 :
+// [3] 오류 메시지 : calc.js 파일에서 secret 을 export 하지 않아, 불러올수 가 없다
