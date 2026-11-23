@@ -14,7 +14,7 @@ function getEvens(numbers) {
     return numbers.filter((n) => n % 2)
 }
 function getPassed(students, min) {
-    // TODO
+    return students.filter(students >= min )
 }
 function removeTodo(todos, id) {
     // TODO
