@@ -21,12 +21,16 @@ const timer = {
 
     start() {
         // TODO
+        setTimeout(() => {
+            this.count++;
+            console.log(`${this.label} : ${this.count}회`);
+        }, 500);
     }
 };
 
 // [1]
 timer.startNormal();   // 0.5초 뒤 : undefined : NaN회
-// 원인 :
+// 원인 : setTimeout 의 콜백이 일반 함수라서, 0.5초 뒤 setTimeout 이 그 함수를 호출할 때 this 가 timer 가 아니다. 그래서 this.label 은 undefined, this.count 는 undefined 에 ++ 를 해서 NaN 이 된다.
 
 // [2]
 timer.start();
@@ -36,4 +40,4 @@ timer.start();
 // 알림 타이머 : 2회
 
 // [3]
-// 답 :
+// 답 : start 자체가 화살표 함수가 되면 this 가 timer 가 아니라 객체 바깥(전역)의 this 가 된다. 안쪽 콜백을 화살표 함수로 써도 그 바깥 this 를 그대로 물려받으므로, [1] 과 똑같이 'undefined : NaN회' 가 출력된다.

@@ -16,20 +16,20 @@ const team = {
 
     // [1]
     printMembers() {
-        this.members.forEach(function (member) {
+        this.members.forEach((member) => {
             console.log(`${this.name} : ${member}`);
         });
     },
 
     // [2]
     getLabels() {
-        return this.members.map(function (member) {
+        return this.members.map((member) => {
             return `[${this.name}] ${member}`;
         });
     },
 
     // [3]
-    getLeader: () => {
+    getLeader() {
         return `팀장 : ${this.leader}`;
     }
 };
@@ -38,10 +38,10 @@ team.printMembers();
 // 기대 :
 // 프론트팀 : 홍길동
 // 프론트팀 : 장보고
-// 원인 :
+// 원인 : forEach 의 콜백이 일반 함수라서 자기만의 this 가 새로 정해진다. 그 this 는 team 이 아니므로 this.name 이 undefined 가 된다.
 
 console.log(team.getLabels());   // 기대 : [ '[프론트팀] 홍길동', '[프론트팀] 장보고' ]
-// 원인 :
+// 원인 : map 의 콜백도 일반 함수라서 [1] 과 같은 이유로 this 가 team 이 아니다. 그래서 this.name 이 undefined 로 들어간다.
 
 console.log(team.getLeader());   // 기대 : 팀장 : 유관순
-// 원인 :
+// 원인 : getLeader 자체가 화살표 함수라서 자기 this 를 만들지 않고 객체 바깥(전역)의 this 를 쓴다. 그래서 this.leader 가 undefined 가 된다.

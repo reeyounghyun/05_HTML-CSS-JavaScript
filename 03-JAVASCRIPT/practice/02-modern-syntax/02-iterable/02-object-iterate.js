@@ -8,22 +8,30 @@
 */
 
 // [1]
+
 function printProfile(user) {
-    for (const item of user) {
-        console.log(item);
-    }
+  for (const [key, value] of Object.entries(user)) {
+    console.log(`${key} : ${value}`);
+  }
 }
-const user = { name: '홍길동', age: 20, city: '서울' };
-// printProfile(user);   // 주석을 풀어 오류를 확인한 뒤 함수를 고친다.
-// 오류 메시지 :
+const user = { name: "홍길동", age: 20, city: "서울" };
+printProfile(user); // 주석을 풀어 오류를 확인한 뒤 함수를 고친다.
+// 오류 메시지 : TypeError: user is not iterable
 // 기대 :
 // name : 홍길동
 // age : 20
 // city : 서울
 
-
 // [2]
 function getFilledKeys(form) {
-    // TODO
+  return Object.entries(form)
+    .filter(([key, value]) => {
+      return value !== "";
+    })
+    .map(([key, value]) => {
+      return key;
+    });
 }
-console.log(getFilledKeys({ email: 'a@test.com', password: '', nickname: '길동' }));   // 기대 : [ 'email', 'nickname' ]
+console.log(
+  getFilledKeys({ email: "a@test.com", password: "", nickname: "길동" }),
+); // 기대 : [ 'email', 'nickname' ]

@@ -28,15 +28,15 @@ const cafe = {
 };
 
 cafe.showArrow();
-// 예상 :
-// 예상 :
+// 예상 : 별다방 - 아메리카노
+// 예상 : 별다방 - 라떼
 
 cafe.showNormal();
-// 예상 :
-// 예상 :
+// 예상 : undefined - 아메리카노
+// 예상 : undefined - 라떼
 
-console.log(cafe.getNameArrow());   // 예상 :
-console.log(cafe.getName());        // 예상 :
+console.log(cafe.getNameArrow());   // 예상 : undefined
+console.log(cafe.getName());        // 예상 : 별다방
 
 // 질문. showNormal 에서 this.name 이 '별다방' 으로 나오지 않는 이유는?
-// 답 :
+// 답 : forEach 의 콜백이 일반 함수라서, forEach 가 그 함수를 그냥 호출할 때 자기만의 this 가 새로 정해진다. 이 this 는 cafe 가 아니라 전역 객체이므로 this.name 이 undefined 가 된다.
