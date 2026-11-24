@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>04_게시글 가져오기 (비동기)</title>
+    <style>
+        #log {
+            background: #f4f4f4;
+            padding: 10px;
+            min-height: 120px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>04. 게시글 가져오기</h1>
+
+    <input type="number" id="idInput" placeholder="게시글 번호 (1~100)" />
+    <button id="fetchBtn">가져오기</button>
+
+    <h3>실행 결과</h3>
+    <div id="log"></div>
+
+    <script>
+        /* 문제 04. async / await 로 게시글 가져오기
+           유형 : 빈칸 채우기 | 난이도 : ★★☆
+
+           뼈대 코드는 이미 있다. TODO 자리에 한 줄씩만 채운다.
+
+           getPost(id) : 입력한 번호의 게시글을 서버에서 가져와 제목을 출력한다.
+             - 성공하면 '[번호] 제목' 을 출력한다.
+             - 없는 번호(404)면 오류를 던지고, catch 에서 '오류 : 메시지' 를 출력한다.
+
+           기대 :
+           1 입력   → 불러오는 중... / [1] sunt aut facere repellat ... / 완료
+           999 입력 → 불러오는 중... / 오류 : 요청 실패 : 404 / 완료
+
+           참고 : lecture/03_web/04_async/03_async-await.html 의 getUser 함수 (거의 같은 구조다)
+        */
+
+        const $log = document.getElementById("log");
+
+        function log(message) {
+            $log.insertAdjacentHTML("beforeend", `<div>${message}</div>`);
+            console.log(message);
+        }
+
+        const API = "https://jsonplaceholder.typicode.com";
+        const $idInput = document.getElementById("idInput");
+
+        async function getPost(id) {
+            log("불러오는 중...");
+
+            try {
+                // TODO 1. null 자리에 : fetch 로 `${API}/posts/${id}` 에 요청을 보내고 await 로 기다린 결과
+                const res = await fetch(`${API}/posts/${id}`);
+
+                if (!res.ok) {
+                    // TODO 2. `요청 실패 : ${res.status}` 메시지로 오류를 던진다. (throw new Error)
+                    throw new Error(`요청실패: ${res.status}`);
+                }
+
+                // TODO 3. null 자리에 : res.json() 을 await 로 기다린 결과
+                const post = await res.json();
+                log(`[${id}번]이름: ${post.title}`);
+            } catch (error) {
+                log(`오류 : ${error.message}`);
+            } finally {
+                log("완료");
+            }
+        }
+
+        document.getElementById("fetchBtn").addEventListener("click", () => {
+            const id = $idInput.value;
+            if (!id) return log("번호를 입력하세요");
+
+            getPost(id);
+        });
+
+        /* [도전] 위를 다 풀었으면 해 보기
+           버튼 하나를 더 만들고, 눌렀을 때 1번, 2번, 3번 게시글 제목을 순서대로 출력해 본다.
+           힌트 : async 함수 안에서 await getPost(1); await getPost(2); await getPost(3);
+                  await 를 빼면 순서가 어떻게 되는지도 비교해 본다.
+        */
+    </script>
+</body>
+
+</html>

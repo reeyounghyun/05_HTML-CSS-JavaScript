@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03_방문 기록 (localStorage)</title>
+    <style>
+        #greeting {
+            font-size: 1.5em;
+            margin: 10px 0;
+        }
+
+        #log {
+            background: #f4f4f4;
+            padding: 10px;
+            min-height: 120px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>03. 방문 기록</h1>
+
+    <div id="greeting"></div>
+
+    <input type="text" id="nameInput" placeholder="닉네임을 입력하세요">
+    <button id="saveBtn">닉네임 저장</button>
+    <button id="resetBtn">기록 지우기</button>
+
+    <h3>실행 결과</h3>
+    <div id="log"></div>
+
+    <script>
+        /* 문제 03. JSON 과 localStorage 로 방문 횟수 세기
+           유형 : 빈칸 채우기 | 난이도 : ★★☆
+
+           뼈대 코드는 이미 있다. TODO 자리에 한 줄씩만 채운다.
+           사용자 정보는 { nickname: '손님', visits: 0 } 형태의 객체 하나로 'profile' 키에 저장한다.
+
+           [1] loadProfile() : 저장된 profile 을 객체로 꺼내 반환한다. 없으면 기본값(DEFAULT_PROFILE)을 반환한다.
+           [2] saveProfile(profile) : profile 객체를 localStorage 에 저장한다.
+           [3] 페이지가 열릴 때마다 visits 를 1 늘려서 저장한다.
+
+           기대 :
+           처음 열기 → 손님님, 1번째 방문입니다.
+           새로고침  → 손님님, 2번째 방문입니다.
+           새로고침  → 손님님, 3번째 방문입니다.
+
+           확인 : 개발자 도구(F12) → Application → Local Storage 에서 profile 값이 JSON 문자열로 들어 있는지 본다.
+           참고 : lecture/03_web/03_storage/01_json-and-localStorage.html 의 loadTodos 와 6-4 저장 부분
+        */
+
+        const $log = document.getElementById('log');
+
+        function log(message) {
+            $log.insertAdjacentHTML('beforeend', `<div>${message}</div>`);
+            console.log(message);
+        }
+
+        const STORAGE_KEY = 'profile';
+        const DEFAULT_PROFILE = { nickname: '손님', visits: 0 };
+
+        const $greeting = document.getElementById('greeting');
+        const $nameInput = document.getElementById('nameInput');
+
+        // [1]
+        function loadProfile() {
+            // TODO 1. localStorage 에서 꺼낸 문자열을 JSON.parse 로 객체로 바꿔 반환한다. 없으면 DEFAULT_PROFILE (??)
+            
+            return JSON.parse(localStorage.getItem(STORAGE_KEY)) ?? DEFAULT_PROFILE;
+        }
+
+        // [2]
+        function saveProfile(profile) {
+            // TODO 2. profile 을 JSON.stringify 로 문자열로 바꿔 localStorage 에 저장한다.
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(profile))
+        }
+
+        function render() {
+            $greeting.textContent = `${profile.nickname}님, ${profile.visits}번째 방문입니다.`;
+        }
+
+        // [3]
+        let profile = loadProfile();
+
+        // TODO 3. profile 의 visits 를 1 늘린다.
+        profile.visits++;
+        saveProfile(profile);
+        render();
+        log(`저장된 값 : ${localStorage.getItem(STORAGE_KEY)}`);
+
+        /* [도전] 위를 다 풀었으면 해 보기
+           1. 닉네임 저장 버튼(saveBtn) : 입력한 닉네임으로 profile.nickname 을 바꾸고 저장한 뒤 render() 한다.
+              빈 값이면 아무것도 하지 않는다. (방문 수는 그대로)
+           2. 기록 지우기 버튼(resetBtn) : localStorage 에서 profile 을 지우고(removeItem),
+              profile 을 DEFAULT_PROFILE 로 되돌린 뒤 render() 한다.
+        */
+    </script>
+</body>
+
+</html>

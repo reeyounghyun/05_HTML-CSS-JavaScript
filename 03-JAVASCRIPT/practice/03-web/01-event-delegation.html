@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01_장보기 목록 (이벤트)</title>
+    <style>
+        ul {
+            background: lightgray;
+            padding: 20px;
+            width: 260px;
+        }
+
+        li {
+            background: white;
+            padding: 8px;
+            margin: 4px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .done span {
+            text-decoration: line-through;
+            color: gray;
+        }
+
+        #log {
+            background: #f4f4f4;
+            padding: 10px;
+            min-height: 60px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>01. 장보기 목록</h1>
+
+    <form id="addForm">
+        <input type="text" id="itemInput" placeholder="살 물건을 입력하세요">
+        <button type="submit">추가</button>
+    </form>
+
+    <ul id="list">
+        <li><span>우유</span><button class="delete">삭제</button></li>
+        <li><span>계란</span><button class="delete">삭제</button></li>
+
+    </ul>
+
+    <h3>실행 결과</h3>
+    <div id="log"></div>
+
+    <script>
+        /* 문제 01. 이벤트로 장보기 목록 만들기
+           유형 : 빈칸 채우기 | 난이도 : ★☆☆
+
+           뼈대 코드는 이미 있다. TODO 자리에 한 줄씩만 채운다.
+
+           [1] 폼을 제출하면 새로고침을 막고, 입력한 물건을 목록 맨 아래에 추가한다.
+           [2] ul 에 건 click 이벤트 하나로(이벤트 위임) '삭제' 버튼을 누른 항목을 지운다.
+                 새로 추가한 항목의 삭제 버튼도 동작해야 한다.
+
+           기대 :
+           '빵' 입력 후 추가 → 목록에 빵이 생김, log : 빵 추가
+           빵의 삭제 클릭     → 빵이 사라짐,    log : 빵 삭제
+
+           ※ 강의에 없던 문법 2개 (그대로 따라 쓰면 된다)
+              요소.parentElement : 그 요소를 감싸고 있는 부모 요소
+              요소.remove()      : 그 요소를 화면에서 지운다
+              예) <li><span>우유</span><button>삭제</button></li> 에서
+                  button.parentElement        → li
+                  button.parentElement.remove() → li 가 통째로 지워짐
+
+           참고 : lecture/03_web/01_event/06_prevent-default.html, 09_event-delegation.html
+        */
+
+        const $log = document.getElementById('log');
+
+        function log(message) {
+            $log.insertAdjacentHTML('beforeend', `<div>${message}</div>`);
+            console.log(message);
+        }
+
+        const $addForm = document.getElementById('addForm');
+        const $itemInput = document.getElementById('itemInput');
+        const $list = document.getElementById('list');
+
+        // [1]
+        $addForm.addEventListener('submit', (e) => {
+            // TODO 1-1. 폼 제출 때문에 새로고침되는 것을 막는다.
+            e.preventDefault();
+
+            const text = $itemInput.value.trim();
+            if (!text) return;
+
+            // TODO 1-2. $list 맨 아래에 아래 HTML 을 추가한다. (insertAdjacentHTML)
+            //           `<li><span>${text}</span><button class="delete">삭제</button></li>`
+            $list.insertAdjacentHTML('beforeend', `<li><span>${text}</span><button class="delete">삭제</button></li>`);
+
+            $itemInput.value = '';
+            log(`${text} 추가`);
+        });
+
+        // [2]
+        $list.addEventListener('click', (e) => {
+            // TODO 2-1. 누른 요소(e.target)가 BUTTON 이 아니면 return 한다.
+            if (e.target.tagName !== 'BUTTON') return;
+
+            const $li = e.target.parentElement;
+            const name = $li.querySelector('span').textContent;
+
+            // TODO 2-2. $li 를 지운다.
+            $li.remove();
+
+            log(`${name} 삭제`);
+        });
+
+        /* [도전] 위를 다 풀었으면 해 보기
+           물건 이름(span)을 누르면 그 li 에 done 클래스를 붙였다 뗐다(toggle) 한다. (줄이 그어짐)
+           힌트 : [2] 의 click 이벤트 안에서 e.target.tagName 이 'SPAN' 인 경우를 따로 처리한다.
+        */
+    </script>
+
+</body>
+
+</html>
