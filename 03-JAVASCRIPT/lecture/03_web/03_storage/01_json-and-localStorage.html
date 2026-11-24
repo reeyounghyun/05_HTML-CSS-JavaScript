@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01_JSON과 localStorage</title>
+    <style>
+        #log {
+            background: #f4f4f4;
+            padding: 10px;
+            min-height: 120px;
+            font-family: monospace;
+        }
+
+        li {
+            margin: 4px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>01. JSON과 localStorage</h1>
+
+    <h3>1. JSON 변환</h3>
+    <button id="jsonBtn">변환해 보기</button>
+
+    <h3>2. 할 일 목록 저장</h3>
+    <input type="text" id="todoInput" placeholder="할 일을 입력하세요">
+    <button id="addBtn">추가</button>
+    <button id="resetBtn">전부 지우기</button>
+    <ul id="todoList"></ul>
+
+    <h3>실행 결과</h3>
+    <div id="log"></div>
+
+    <script>
+        const $log = document.getElementById('log');
+
+        function log(message) {
+            $log.insertAdjacentHTML('beforeend', `<div>${message}</div>`);
+            console.log(message);
+        }
+
+        /**
+        localStorage
+        1. 브라우저에 값을 남겨두는 공간 (key, value)
+        2. 문자열만 저장 -> 객체, 배열 -> JSON으로 변환
+        */
+
+        document.getElementById("jsonBtn").addEventListener("click", () => {
+            const user = { name: "홍길동", age: 20 };
+
+            // 객체 -> 문자열
+            const text = JSON.stringify(user);
+            log(`stringify : ${text} (${typeof text})`);
+
+            const parsed = JSON.parse(text);
+            log(`parse : ${parsed} (${typeof parsed})`);
+
+            // 변환을 안 하고 객체로 그대로 저장 : 내용이 사라짐
+            localStorage.setItem("wrongUser", user);
+
+            log(`그대로 저장 : ${localStorage.getItem("wrongUser")}`);
+            localStorage.removeItem("wrongUser");
+
+            // 사라지기 때문에 JSON 문자열로 변환하여 저장
+            localStorage.setItem("goodUser", text);
+            log(`변환후 저장 : ${localStorage.getItem("goodUser")}`);
+            const parsedUser = JSON.parse(localStorage.getItem("goodUser"));
+
+            log(`파싱후 출력 : ${parsedUser}`);
+        });
+
+        // 1. 로컬스토리지에 담을 키 값 이름 정하기
+        const STORAGE_KEY = 'todos';
+
+        // 2. 입력칸과 목록을 보여줄 요소
+        const $todoInput = document.getElementById("todoInput"); // input 
+        const $todoList = document.getElementById("todoList"); // ul
+
+        // 3. (이전 방식) 현재 저장되어 있는 todos 키의 value = 저장된 todo 목록이 됨. // 값이 없으면 빈 배열이 나옴( ?? [] )
+        //let todos = localStorage.getItem(STORAGE_KEY) ?? [];
+
+        // 4. 로컬스토리지에 저장된 Todos 목록을 꺼내오는 함수 (없으면 빈 배열 반환)
+        function loadTodos() {
+            return JSON.parse(localStorage.getItem(STORAGE_KEY)) ?? [];
+        }
+
+        // 4-1. Todos를 화면에 그려주는 함수
+        function render(todo) {
+            // $todoList 요소 안에 있는 HTML 코드를 지우는 역할
+            $todoList.innerHTML = "";
+            todos.forEach((todo) => {
+                $todoList.insertAdjacentHTML("beforeend", `<li>${todo.text}</li>`);
+            });
+        }
+
+        // 5. 기존에 있던 목록으로 초기화
+        let todos = loadTodos();
+
+        render(todos);
+
+        // 6. 추가 버튼을 클릭했을 때
+        document.getElementById("addBtn").addEventListener("click", () => {
+            // 6-1. 입력한 값 가져오기 (앞뒤 공백 제거)
+            const text = $todoInput.value.trim();
+
+            // 6-2. 텍스트가 없을 때 종료
+            if (!text) return;
+
+            // 6-3. todo 배열 만들기(기존 정보가 필요함)
+            // 기존 todos 배열에 추가된 todo(새로 만듦)
+            todos = [...todos, { id: Date.now(), text }];
+
+            // 6-4. 저장, 문자열로 변환하여 추가됨
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+
+            // 6-5. 화면 다시 그리기
+            render(todos);
+
+            // 6-6. 입력창 비우기
+            $todoInput.value = "";
+        });
+
+
+        // 7. 전부 지우기 버튼을 클릭했을 때 (저장소, 배열, 화면 모두 비우기)
+        document.getElementById("resetBtn").addEventListener("click", () => {
+            localStorage.removeItem(STORAGE_KEY);
+            todos = [];
+            render(todos);
+        });
+
+    </script>
+</body>
+
+</html>
